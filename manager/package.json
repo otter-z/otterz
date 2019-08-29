@@ -1,0 +1,26 @@
+{
+  "name": "otterz-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run live",
+    "build": "rm -rf ./build/* && tsc && npm run tslint",
+    "live:node": "nodemon ./build/index.js",
+    "live:ts": "tsc -w",
+    "live": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,green.bold\"  \"npm run live:ts\" \"npm run live:node\"",
+    "tslint": "tslint -c tslint.json -p tsconfig.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bull": "^3.10.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.2",
+    "concurrently": "^4.1.2",
+    "tslint": "^5.19.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.6.2"
+  }
+}
