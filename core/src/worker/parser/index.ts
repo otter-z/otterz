@@ -1,5 +1,5 @@
-import { Redis } from '../../services';
-import { Request } from '../../services';
+import { Redis } from '../../utils';
+import { Request } from '../../utils';
 import { Job } from 'bull';
 import cheerio from 'cheerio';
 import { AxiosResponse } from 'axios';
