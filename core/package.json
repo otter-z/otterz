@@ -27,9 +27,12 @@
     "@types/cheerio": "^0.22.13",
     "@types/dotenv": "^6.1.1",
     "@types/ioredis": "^4.0.15",
+    "@types/jest": "^24.0.18",
     "@types/node": "^12.7.2",
     "@types/ramda": "^0.26.21",
     "concurrently": "^4.1.2",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.0.2",
     "tslint": "^5.19.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.6.2"
