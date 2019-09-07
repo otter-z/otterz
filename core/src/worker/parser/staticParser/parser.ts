@@ -1,57 +1,55 @@
 import cheerio from 'cheerio';
 
 export default class StaticParser {
-  private _$: CheerioStatic;
+  private $: CheerioStatic;
   constructor(html: string) {
-    this._$ = cheerio.load(html);
+    this.$ = cheerio.load(html);
   }
 
-  setHTML = (html: string): void => {
-    this._$ = cheerio.load(html);
+  public setHTML = (html: string): void => {
+    this.$ = cheerio.load(html);
   };
 
-  getAttrs = (selector: string, attr: string) => {
-    let _this: any = this;
-    return (this._$(selector)
-      .map(function(_: any, el: CheerioElement) {
-        return _this._$(el).attr(attr);
+  public getAttrs = (selector: string, attr: string): string[] => {
+    const self: any = this;
+    return (this.$(selector)
+      .map((i: any, el: CheerioElement) => {
+        return self.$(el).attr(attr);
       })
       .toArray() as any) as string[];
   };
 
-  getChildrenAttrs = (selector: string, attr: string) => {
-    let _this: any = this;
-    return (this._$(selector)
-      .map(function(_: any, el: CheerioElement) {
-        return _this
-          ._$(el)
+  public getChildrenAttrs = (selector: string, attr: string): string[] => {
+    const self: any = this;
+    return (this.$(selector)
+      .map((_: any, el: CheerioElement) => {
+        return self
+          .$(el)
           .children()
-          .map((_: any, e: CheerioElement) =>
-            _this._$(`[${attr}]`, e).attr(attr)
-          )
+          .map((i: any, e: CheerioElement) => self.$(`[${attr}]`, e).attr(attr))
           .toArray();
       })
       .toArray() as any) as string[];
   };
 
-  getTexts = (selector: string): string[] => {
-    let _this: any = this;
-    return (_this
-      ._$(selector)
-      .map(function(_: any, el: CheerioElement) {
-        return _this._$(el).text();
+  public getTexts = (selector: string): string[] => {
+    const self: any = this;
+    return (self
+      .$(selector)
+      .map((_: any, el: CheerioElement) => {
+        return self.$(el).text();
       })
       .toArray() as any) as string[];
   };
 
-  getChildrenTexts = (selector: string) => {
-    let _this: any = this;
-    return (this._$(selector)
-      .map(function(_: any, el: CheerioElement) {
-        return _this
-          ._$(el)
+  public getChildrenTexts = (selector: string): string[] => {
+    const self: any = this;
+    return (this.$(selector)
+      .map((_: any, el: CheerioElement) => {
+        return self
+          .$(el)
           .children()
-          .map((_: any, e: CheerioElement) => _this._$(e).text())
+          .map((i: any, e: CheerioElement) => self.$(e).text())
           .toArray();
       })
       .toArray() as any) as string[];

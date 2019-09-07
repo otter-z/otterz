@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run live",
+    "serve": "npm run build && node ./build/index.js",
     "build": "rm -rf ./build/* && npm run tslint && tsc ",
     "live:node": "nodemon ./build/index.js",
     "live:ts": "tsc -w",
@@ -19,6 +20,7 @@
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.1.0",
     "ioredis": "^4.14.0",
+    "normalize-url": "^4.3.0",
     "ramda": "^0.26.1"
   },
   "devDependencies": {
