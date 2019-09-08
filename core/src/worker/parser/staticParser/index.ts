@@ -1,4 +1,4 @@
-import Bull from 'bull';
+import { Job } from 'bull';
 import { Request } from '../../../utils';
 import StaticParser from './parser';
 import { getQueue } from '../../../utils/queue';
@@ -15,7 +15,7 @@ interface IData {
 
 const scrapQueue = getQueue('scrap');
 
-export default async (job: Bull.Job): Promise<boolean> => {
+export default async (job: Job): Promise<boolean> => {
   const data: IData = job.data;
   const html = await Request.getPageHtml(data.task.url);
   const parser = new StaticParser(html);
