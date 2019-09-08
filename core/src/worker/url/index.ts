@@ -1,6 +1,6 @@
 import Bull from 'bull';
 import NormalizeURL from 'normalize-url';
-
+import Config from '../../config';
 import { getQueue } from '../../utils/queue';
 
 interface ITask {
@@ -22,7 +22,7 @@ export default async (job: Bull.Job): Promise<boolean> => {
   if (data.task.foundURLs && data.task.deep < 2) {
     data.task.foundURLs.forEach(url => {
       console.log(`add url to queue : ${url}`);
-      scrapQueue.add('PARSE', {
+      scrapQueue.add(Config.CHANNEL_PARSE, {
         projectId: data.projectId,
         task: {
           url: NormalizeURL(url),

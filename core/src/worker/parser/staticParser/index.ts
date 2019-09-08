@@ -2,6 +2,7 @@ import Bull from 'bull';
 import { Request } from '../../../utils';
 import StaticParser from './parser';
 import { getQueue } from '../../../utils/queue';
+import Config from '../../../config';
 interface ITask {
   url: string;
   deep: number;
@@ -24,7 +25,7 @@ export default async (job: Bull.Job): Promise<boolean> => {
     `level ${data.task.deep} - ${data.task.url} - found ${URLS.length} URLS `
   );
 
-  await scrapQueue.add('URL', {
+  await scrapQueue.add(Config.CHANNEL_URL, {
     projectId: data.projectId,
     task: { deep: data.task.deep, foundURLs: URLS }
   });
