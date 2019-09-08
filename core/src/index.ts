@@ -9,7 +9,7 @@ const scrapQueue = getQueue('scrap');
 scrapQueue.process(
   'PARSE',
   1,
-  path.resolve(__dirname, './worker/parser/staticParser/index.js')
+  path.resolve(__dirname, './worker/parser/static-parser/index.js')
 );
 
 scrapQueue.process('URL', 1, path.resolve(__dirname, './worker/url/index.js'));
