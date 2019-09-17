@@ -21,6 +21,7 @@
     "dotenv": "^8.1.0",
     "ioredis": "^4.14.0",
     "normalize-url": "^4.3.0",
+    "puppeteer": "^1.19.0",
     "ramda": "^0.26.1"
   },
   "devDependencies": {
@@ -31,6 +32,7 @@
     "@types/ioredis": "^4.0.15",
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.2",
+    "@types/puppeteer": "^1.19.1",
     "@types/ramda": "^0.26.21",
     "concurrently": "^4.1.2",
     "jest": "^24.9.0",

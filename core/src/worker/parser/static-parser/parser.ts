@@ -12,7 +12,8 @@ export default class StaticParser {
 
   public getAttrs = (selector: string, attr: string): string[] => {
     const self: any = this;
-    return (this.$(selector)
+    return (self
+      .$(selector)
       .map((i: any, el: CheerioElement) => {
         return self.$(el).attr(attr);
       })
@@ -21,7 +22,8 @@ export default class StaticParser {
 
   public getChildrenAttrs = (selector: string, attr: string): string[] => {
     const self: any = this;
-    return (this.$(selector)
+    return (self
+      .$(selector)
       .map((_: any, el: CheerioElement) => {
         return self
           .$(el)
@@ -44,7 +46,8 @@ export default class StaticParser {
 
   public getChildrenTexts = (selector: string): string[] => {
     const self: any = this;
-    return (this.$(selector)
+    return (self
+      .$(selector)
       .map((_: any, el: CheerioElement) => {
         return self
           .$(el)
