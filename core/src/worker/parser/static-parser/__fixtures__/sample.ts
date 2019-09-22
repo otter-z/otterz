@@ -1,5 +1,4 @@
-export default {
-  HTML: `
+export const HTML = `
   <!DOCTYPE html>
   <html>
   <body>
@@ -33,4 +32,3 @@ export default {
   </body>
   </html>
   `
-};
