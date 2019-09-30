@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { getQueue } from './utils/queue';
+import { getQueue } from './utils/helper/queue';
 import path from 'path';
 
 const scrapQueue = getQueue('scrap');

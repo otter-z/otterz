@@ -1,7 +1,7 @@
 import { Job } from 'bull';
 import NormalizeURL from 'normalize-url';
 import Config from '../../config';
-import { getQueue } from '../../utils/queue';
+import { getQueue } from '../../utils/helper/queue';
 
 interface ITask {
   foundURLs: string[];

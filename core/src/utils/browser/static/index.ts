@@ -1,14 +1,41 @@
-import cheerio from 'cheerio';
+import cheerio from "cheerio";
+import { IBrowser } from "..";
+import { IResponse , GET } from '../../helper'
 
-export default class StaticParser {
-  private $: CheerioStatic;
-  constructor(html: string) {
-    this.$ = cheerio.load(html);
+
+export default class StaticBrowser implements IBrowser {
+
+  private $: CheerioStatic | undefined;
+
+  public async goto(url: string): Promise<IResponse<string>> {
+    try {
+      const response = await GET(url);
+      if (response.status < 400) {
+        this.$ = cheerio.load(response.data);
+      }
+      return response;
+    }
+    catch (e) {
+      console.error(e);
+      throw (e);
+    }
   }
 
-  public setHTML = (html: string): void => {
-    this.$ = cheerio.load(html);
-  };
+  public scrapText(selector: string): string | undefined {
+    const el = this.getFirstElement(selector);
+    if (el) {
+      return el.text();
+    }
+    return undefined;
+  }
+
+  public scrapAttribut(selector: string, attr: string): string | undefined {
+    const el = this.getFirstElement(selector);
+    if (el) {
+      return el.attr(attr);
+    }
+    return undefined;
+  }
 
   public getAttrs = (selector: string, attr: string): string[] => {
     const self: any = this;
@@ -57,4 +84,17 @@ export default class StaticParser {
       })
       .toArray() as any) as string[];
   };
+
+  protected getFirstElement(selector: string): Cheerio | undefined {
+    if (!this.$) {
+      return undefined;
+    }
+
+    const el = this.$(selector);
+    if (el.length) {
+      return el.first()
+    }
+
+    return undefined;
+  }
 }

@@ -1,7 +1,7 @@
-import redis from '../../utils/redis';
+import { Redis } from '../../utils/helper';
 import { Job } from 'bull';
 import Config from '../../config';
-import { getQueue } from '../../utils/queue';
+import { getQueue } from '../../utils/helper/queue';
 
 interface ITask {
   data: any;
@@ -15,7 +15,7 @@ interface IData {
 export default async (job: Job): Promise<boolean> => {
   const data: IData = job.data;
 
-  redis.lpush(data.projectId, data.task.data);
+  Redis.lpush(data.projectId, data.task.data);
 
   return true;
 };

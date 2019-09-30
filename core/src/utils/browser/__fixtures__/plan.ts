@@ -44,7 +44,7 @@ const sample_plan = {
         },
         {
           "propName": "model",
-          "properties": [...],
+          "properties": [],
           "selector": ".class"
         },
 
