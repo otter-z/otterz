@@ -1,4 +1,4 @@
-const sample_plan = {
+const SAMPLE_PLAN = {
   "websiteURL": "https://www.telenor.se/handla/mobiler/samsung/galaxy-s10-plus",
   "urlFilters": ["https://www.telenor.se/handla/mobiler.*", "https://www.telenor.se/service.*"],
   config: {

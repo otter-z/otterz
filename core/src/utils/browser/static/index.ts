@@ -1,40 +1,59 @@
 import cheerio from "cheerio";
-import { IBrowser } from "..";
-import { IResponse , GET } from '../../helper'
-
+import { IBrowser } from "../IBrowser";
+import { IResponse, GET } from "../../helper";
 
 export default class StaticBrowser implements IBrowser {
-
   private $: CheerioStatic | undefined;
 
+  /** loads the specific URL in browser */
   public async goto(url: string): Promise<IResponse<string>> {
-    try {
-      const response = await GET(url);
-      if (response.status < 400) {
-        this.$ = cheerio.load(response.data);
-      }
+    const response = await GET(url);
+
+    if (response.status < 400) {
+      this.$ = cheerio.load(response.data);
       return response;
-    }
-    catch (e) {
-      console.error(e);
-      throw (e);
+    } else {
+      console.error(`status : ${response.status} , body : ${response.data}`);
+      throw new Error(`status : ${response.status} , body : ${response.data}`);
     }
   }
 
-  public scrapText(selector: string): string | undefined {
+  /** Scraps text from page */
+  public scrapText(selector: string): string | null {
+    if (!this.$) {
+      return null;
+    }
+
     const el = this.getFirstElement(selector);
+
     if (el) {
       return el.text();
     }
-    return undefined;
+    return null;
   }
 
-  public scrapAttribut(selector: string, attr: string): string | undefined {
+  /** Scraps attribute form page element by element selector */
+  public scrapAttribut(selector: string, attr: string): string | null {
+    if (!this.$) {
+      return null;
+    }
+
     const el = this.getFirstElement(selector);
     if (el) {
       return el.attr(attr);
     }
-    return undefined;
+    return null;
+  }
+
+  /** tries to find the element prior to selector */
+  public isExist(selector: string): boolean {
+    if (!this.$) {
+      return false;
+    }
+
+    const el = this.getFirstElement(selector);
+
+    return !!el;
   }
 
   public getAttrs = (selector: string, attr: string): string[] => {
@@ -45,7 +64,7 @@ export default class StaticBrowser implements IBrowser {
         return self.$(el).attr(attr);
       })
       .toArray() as any) as string[];
-  };
+  }
 
   public getChildrenAttrs = (selector: string, attr: string): string[] => {
     const self: any = this;
@@ -59,7 +78,7 @@ export default class StaticBrowser implements IBrowser {
           .toArray();
       })
       .toArray() as any) as string[];
-  };
+  }
 
   public getTexts = (selector: string): string[] => {
     const self: any = this;
@@ -69,7 +88,7 @@ export default class StaticBrowser implements IBrowser {
         return self.$(el).text();
       })
       .toArray() as any) as string[];
-  };
+  }
 
   public getChildrenTexts = (selector: string): string[] => {
     const self: any = this;
@@ -83,7 +102,7 @@ export default class StaticBrowser implements IBrowser {
           .toArray();
       })
       .toArray() as any) as string[];
-  };
+  }
 
   protected getFirstElement(selector: string): Cheerio | undefined {
     if (!this.$) {
@@ -92,7 +111,7 @@ export default class StaticBrowser implements IBrowser {
 
     const el = this.$(selector);
     if (el.length) {
-      return el.first()
+      return el.first();
     }
 
     return undefined;
