@@ -1,7 +1,7 @@
-import { Job } from 'bull';
-import NormalizeURL from 'normalize-url';
-import Config from '../../config';
-import { getQueue } from '../../utils/helper/queue';
+import { Job } from "bull";
+import NormalizeURL from "normalize-url";
+import Config from "../../config";
+import { getQueue } from "../../utils/helper/queue";
 
 interface ITask {
   foundURLs: string[];
@@ -13,7 +13,7 @@ interface IData {
   task: ITask;
 }
 
-const scrapQueue = getQueue('scrap');
+const scrapQueue = getQueue("scrap");
 const i = 0;
 
 export default async (job: Job): Promise<boolean> => {

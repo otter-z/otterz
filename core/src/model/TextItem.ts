@@ -7,9 +7,7 @@ export class TextItem extends BaseItem {
   }
 
   public scrap(browser: IBrowser): { [key: string]: string } | null {
-    console.log(this.selector);
     const result = browser.scrapText(this.selector);
-    console.log(result);
 
     if (result) {
       return { [this.propName]: result };

@@ -5,7 +5,7 @@ const get = jest.fn(async (url) => {
     if (url === "https://www.wikipedia.org") {
         result = BASIC_HTML;
     }
-    if (url === "https://www.telenor.se") {
+    if (url === "http://www.example.model") {
         result = BASIC_HTML;
     }
     return {

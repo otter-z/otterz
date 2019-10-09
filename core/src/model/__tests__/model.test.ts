@@ -1,38 +1,49 @@
 import StaticBrowser from "../../utils/browser/static";
-import { TextItem , ArrayItem , ObjectItem , AttributeItem} from "../index";
+import { TextItem, ArrayItem, ObjectItem, AttributeItem } from "../index";
 
 const browser = new StaticBrowser();
 
-const textItem = new TextItem(
-  "header",
-  ".b"
-);
-const objectItem = new ObjectItem(
-  "header",
-  ".roduct-presentation-block__container__inner-content__header",
-  []
-);
+const textItem = new TextItem("header", ".b");
+const textItemResult = {
+  header: "About",
+};
 
-const arrayItem = new ArrayItem(
-  "header",
-  ".roduct-presentation-block__container__inner-content__header",
-  []
-);
+const attributeItem = new AttributeItem("data", "input.data", "value");
+const attributeItemResult = {
+  data: "hallowin",
+};
 
-const attributeItem = new AttributeItem(
-  "s10_img",
-  "#main > div > div:nth-child(1) > div.product-presentation-block.full-viewport > div > div.product-presentation-block__promoted-item-container > div > div:nth-child(1) > a > div.promoted-item__product-image-container > img",
-  "src"
-);
+const objectItem = new ObjectItem("result", ".nav", [textItem, attributeItem]);
+const objectItemResult = {
+  result: {
+    ...textItemResult,
+    ...attributeItemResult,
+  },
+};
+
+const arrayItem = new ArrayItem("result", ".nav", [textItem, attributeItem]);
+const arrayItemResult = {
+  result: [textItemResult, attributeItemResult],
+};
 
 beforeAll(async () => {
-  await browser.goto("https://www.telenor.se");
+  await browser.goto("http://www.example.model");
 });
 
 describe("scrap", () => {
-  test("textItem", async () => {
-    expect(textItem.scrap(browser)).toEqual({
-      header: "About",
-    });
+  test("text item", async () => {
+    expect(textItem.scrap(browser)).toEqual(textItemResult);
+  });
+
+  test("attribute item", () => {
+    expect(attributeItem.scrap(browser)).toEqual(attributeItemResult);
+  });
+
+  test("array item", () => {
+    expect(arrayItem.scrap(browser)).toEqual(arrayItemResult);
+  });
+
+  test("object item", () => {
+    expect(objectItem.scrap(browser)).toEqual(objectItemResult);
   });
 });

@@ -16,7 +16,7 @@ export const BASIC_HTML = `
   <li class="food">Sesami Street</li>
   <li class="food">Kebab</li>
   <li class="food">Salad
-  <span><input value="hallowin"></input></span>
+  <span><input class="data" value="hallowin"></input></span>
   </li>
 </ul>
 
