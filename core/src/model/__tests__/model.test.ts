@@ -26,6 +26,22 @@ const arrayItemResult = {
   result: [textItemResult, attributeItemResult],
 };
 
+const nestedArrayItem = new ArrayItem("result", ".nav", [
+  arrayItem,
+  objectItem,
+]);
+const nestedArrayItemResult = {
+  result: [arrayItemResult, objectItemResult],
+};
+
+const nestedObjectItem = new ObjectItem("result", ".nav", [
+  arrayItem,
+  objectItem,
+]);
+const nestedObjectItemResult = {
+  result: { ...arrayItemResult , ...objectItemResult},
+};
+
 beforeAll(async () => {
   await browser.goto("http://www.example.model");
 });
@@ -45,5 +61,13 @@ describe("scrap", () => {
 
   test("object item", () => {
     expect(objectItem.scrap(browser)).toEqual(objectItemResult);
+  });
+
+  test("nested array item", () => {
+    expect(nestedArrayItem.scrap(browser)).toEqual(nestedArrayItemResult);
+  });
+
+  test("nested object item", () => {
+    expect(nestedObjectItem.scrap(browser)).toEqual(nestedObjectItemResult);
   });
 });
