@@ -1,5 +1,5 @@
 import { BaseItem } from "./BaseItem";
-import { IBrowser } from "../utils/browser/IBrowser";
+import { IBrowser } from "../../utils/browser/IBrowser";
 import { mergeDeepRight, defaultTo } from "ramda";
 
 export class ObjectItem extends BaseItem {

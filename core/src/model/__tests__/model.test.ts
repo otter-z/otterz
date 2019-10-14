@@ -1,5 +1,5 @@
 import StaticBrowser from "../../utils/browser/static";
-import { TextItem, ArrayItem, ObjectItem, AttributeItem } from "../index";
+import { TextItem, ArrayItem, ObjectItem, AttributeItem } from "../scrap/index";
 
 const browser = new StaticBrowser();
 

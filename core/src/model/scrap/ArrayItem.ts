@@ -1,5 +1,5 @@
 import { BaseItem } from "./BaseItem";
-import { IBrowser } from "../utils/browser/IBrowser";
+import { IBrowser } from "../../utils/browser/IBrowser";
 import { defaultTo } from "ramda";
 
 export class ArrayItem extends BaseItem {

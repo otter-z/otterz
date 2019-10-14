@@ -1,5 +1,5 @@
 import { BaseItem } from "./BaseItem";
-import { IBrowser } from "../utils/browser/IBrowser";
+import { IBrowser } from "../../utils/browser/IBrowser";
 
 export class AttributeItem extends BaseItem {
   public attribute: string;

@@ -1,4 +1,4 @@
-import { IBrowser } from "../utils/browser/IBrowser";
+import { IBrowser } from "../../utils/browser/IBrowser";
 
 /** This is the base class for Scraps */
 export abstract class BaseItem {
